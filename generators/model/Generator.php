@@ -356,7 +356,9 @@ class Generator extends \yii\gii\Generator
                 $targetAttributes[] = "'$key' => '$value'";
             }
             $targetAttributes = implode(', ', $targetAttributes);
-            $rules[] = "[['$attributes'], 'exist', 'skipOnError' => true, 'targetClass' => $refClassName::className(), 'targetAttribute' => [$targetAttributes]]";
+            
+            $ns=getNamespaceForPhpFile("common/models",$refClassName);
+            $rules[] = "[['$attributes'], 'exist', 'skipOnError' => true, 'targetClass' => $ns$refClassName::className(), 'targetAttribute' => [$targetAttributes]]";
         }
 
         return $rules;
